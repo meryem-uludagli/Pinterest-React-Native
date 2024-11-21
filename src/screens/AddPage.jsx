@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const Add = () => {
+const AddPage = () => {
   return (
     <View>
       <Text>Add</Text>
@@ -9,6 +9,6 @@ const Add = () => {
   );
 };
 
-export default Add;
+export default AddPage;
 
 const styles = StyleSheet.create({});

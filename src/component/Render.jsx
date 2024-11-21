@@ -1,10 +1,13 @@
 import {StyleSheet, Image, FlatList, TouchableOpacity} from 'react-native';
-import Data from '../utils/Data.js';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
+import {useContext} from 'react';
+import {DataContext} from '../context/Data'; // Context adını düzgün içe aktarıyoruz.
 
 const Render = () => {
+  const {pinterestPosts} = useContext(DataContext); // Doğru context'e erişiyoruz.
   const navigation = useNavigation();
+
   const renderItem = ({item}) => (
     <TouchableOpacity
       onPress={() => navigation.navigate('Card', {item})}
@@ -16,7 +19,7 @@ const Render = () => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={Data}
+        data={pinterestPosts}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
         numColumns={2}

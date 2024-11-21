@@ -1,29 +1,60 @@
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import Profile from '../screens/Profile';
-import Add from '../screens/Add';
-import {Home2, ProfileCircle} from 'iconsax-react-native';
+import AddPage from '../screens/AddPage';
+import SearchPage from '../screens/SearchPage';
+import Message from '../screens/Message';
+import {
+  Home2,
+  SearchFavorite1,
+  ProfileCircle,
+  Add,
+  Messages1,
+} from 'iconsax-react-native';
+import Card from '../screens/Card';
 
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function Navigation() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{tabBarShowLabel: false}}>
       <Tab.Screen
         name="Home"
         component={Home}
         options={{
           tabBarIcon: ({focused, color, size}) => (
-            <Home2 size="32" color="#FF8A65" />
+            <Home2 size="32" color="#555555" variant="Bold" />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="Search"
+        component={SearchPage}
+        options={{
+          tabBarIcon: ({focused, color, size}) => (
+            <SearchFavorite1 size="32" color="#555555" variant="Bold" />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="add"
+        component={AddPage}
+        options={{
+          tabBarIcon: ({focused, color, size}) => (
+            <Add size="32" color="#555555" variant="Bold" />
           ),
         }}
       />
       <Tab.Screen
-        name="Add"
-        component={Add}
+        name="Message"
+        component={Message}
         options={{
           tabBarIcon: ({focused, color, size}) => (
-            <Add size="32" color="#FF8A65" />
+            <Messages1 size="32" color="#555555" variant="Bold" />
           ),
         }}
       />
@@ -32,12 +63,25 @@ function Navigation() {
         component={Profile}
         options={{
           tabBarIcon: ({focused, color, size}) => (
-            <ProfileCircle size="32" color="#FF8A65" />
+            <ProfileCircle size="32" color="#555555" variant="Bold" />
           ),
         }}
       />
     </Tab.Navigator>
   );
 }
+
+export const NativeStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen
+        name="Card"
+        component={Card}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+};
 
 export default Navigation;
