@@ -6,10 +6,17 @@ import {
   Text,
   TouchableOpacity,
   FlatList,
+  SafeAreaView,
+  Platform,
 } from 'react-native';
-import Render from '../component/Render';
+import {useNavigation} from '@react-navigation/native';
+import {useContext} from 'react';
+import {DataContext} from '../context/Data';
 
 const Profile = () => {
+  const navigation = useNavigation();
+  const {pinterestPosts} = useContext(DataContext);
+
   const user = {
     name: 'Meryem Uludagli',
     followers: 967,
@@ -18,47 +25,53 @@ const Profile = () => {
       'https://i.pinimg.com/564x/40/c3/0d/40c30dca70da6777f2f3de8b2407c9b9.jpg',
   };
 
-  const renderItem = ({item}) => (
-    <View style={styles.item}>
-      <Image style={styles.image} source={{uri: item.image}} />
-      <Text style={styles.title}>{item.title}</Text>
-    </View>
+  const renderGridItem = ({item}) => (
+    <TouchableOpacity
+      style={styles.gridItem}
+      onPress={() => navigation.navigate('Card', {item})}
+      activeOpacity={0.9}>
+      <Image style={styles.gridImage} source={{uri: item.image}} />
+    </TouchableOpacity>
   );
 
   return (
-    <FlatList
-      data={[user]}
-      renderItem={({item}) => (
-        <View style={styles.profileContainer}>
-          <Image
-            style={styles.profileImage}
-            source={{uri: item.profileImage}}
-          />
-          <Text style={styles.name}>{item.name}</Text>
-          <View style={styles.usernameContainer}>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        ListHeaderComponent={() => (
+          <View style={styles.profileContainer}>
             <Image
-              style={styles.icon}
-              source={{
-                uri: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png',
-              }}
+              style={styles.profileImage}
+              source={{uri: user.profileImage}}
             />
-            <Text style={styles.username}>meryemuludagli</Text>
+            <Text style={styles.name}>{user.name}</Text>
+            <View style={styles.usernameContainer}>
+              <Image
+                style={styles.icon}
+                source={{
+                  uri: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png',
+                }}
+              />
+              <Text style={styles.username}>meryemuludagli</Text>
+            </View>
+            <View style={styles.followContainer}>
+              <Text style={styles.followCount}>{user.followers} Followers</Text>
+              <Text style={styles.separator}> · </Text>
+              <Text style={styles.followCount}>{user.following} Following</Text>
+            </View>
+            <TouchableOpacity style={styles.editButton}>
+              <Text style={styles.editButtonText}>Edit Profile</Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.followContainer}>
-            <Text style={styles.followCount}>{item.followers} Followers</Text>
-            <Text style={styles.separator}> · </Text>
-            <Text style={styles.followCount}>{item.following} Following</Text>
-          </View>
-          <TouchableOpacity style={styles.editButton}>
-            <Text style={styles.editButtonText}>Edit Profile</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-      keyExtractor={item => item.name}
-      ListHeaderComponent={<View style={styles.headerSpacer} />}
-      ListFooterComponent={<Render />}
-      contentContainerStyle={styles.container}
-    />
+        )}
+        data={pinterestPosts}
+        renderItem={renderGridItem}
+        keyExtractor={item => item.id.toString()}
+        numColumns={2}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.listContent}
+        columnWrapperStyle={styles.columnWrapper}
+      />
+    </SafeAreaView>
   );
 };
 
@@ -66,90 +79,104 @@ export default Profile;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    backgroundColor: '#f5f5f5',
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  listContent: {
+    paddingHorizontal: 8,
+  },
+  columnWrapper: {
+    justifyContent: 'space-between',
   },
   profileContainer: {
-    marginTop: 30,
+    paddingTop: Platform.OS === 'ios' ? 0 : 20,
     alignItems: 'center',
     marginBottom: 20,
   },
   profileImage: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    borderWidth: 2,
-    borderColor: '#ccc',
-    marginBottom: 10,
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginBottom: 16,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
   },
   name: {
     fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 5,
+    fontWeight: '700',
+    color: '#111',
+    marginBottom: 4,
   },
   usernameContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 12,
   },
   icon: {
     width: 18,
     height: 18,
-    marginRight: 5,
+    marginRight: 6,
   },
   username: {
     fontSize: 16,
-    color: 'gray',
+    color: '#666',
   },
   followContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    width: '60%',
-    marginTop: 10,
+    alignItems: 'center',
+    marginBottom: 16,
   },
   followCount: {
     fontSize: 16,
-    color: 'black',
-    fontWeight: 'bold',
+    color: '#111',
+    fontWeight: '600',
   },
   separator: {
     fontSize: 16,
-    color: 'black',
-    fontWeight: 'bold',
-    marginHorizontal: 5,
+    color: '#666',
+    marginHorizontal: 8,
   },
   editButton: {
-    marginTop: 20,
-    backgroundColor: '#e0e0e0',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 20,
+    backgroundColor: '#EFEFEF',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 24,
+    marginBottom: 24,
   },
   editButtonText: {
     fontSize: 16,
-    color: 'black',
-    fontWeight: 'bold',
-    paddingHorizontal: 8,
-    margin: 2,
+    color: '#111',
+    fontWeight: '600',
   },
-  item: {
+  gridItem: {
     flex: 1,
-    margin: 5,
-    borderRadius: 10,
+    margin: 4,
+    borderRadius: 16,
     overflow: 'hidden',
-    backgroundColor: '#fff',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 2,
+      },
+    }),
   },
-  image: {
+  gridImage: {
     width: '100%',
-    height: 150,
+    aspectRatio: 1,
     resizeMode: 'cover',
-  },
-  title: {
-    padding: 5,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  headerSpacer: {
-    height: 20,
   },
 });

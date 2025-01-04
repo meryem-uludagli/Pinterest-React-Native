@@ -9,6 +9,9 @@ export const DataProvider = ({children}) => {
       image:
         'https://i.pinimg.com/474x/d4/75/44/d4754494a28f7456e7458ac3e290e318.jpg',
       title: 'Old money',
+      description:
+        'A visual representing a classic and sophisticated lifestyle.',
+      category: 'Lifestyle',
       likes: 150,
       comments: 5,
     },
@@ -17,6 +20,8 @@ export const DataProvider = ({children}) => {
       image:
         'https://i.pinimg.com/474x/2a/75/8b/2a758bf581a114a5d9f11452ec11ab32.jpg',
       title: 'Abstract Art',
+      description: 'A piece of creative and colorful abstract artwork.',
+      category: 'Art',
       likes: 200,
       comments: 10,
     },
@@ -24,7 +29,9 @@ export const DataProvider = ({children}) => {
       id: '2',
       image:
         'https://i.pinimg.com/originals/f6/c3/93/f6c3937a4411215b7359336d638980ec.jpg',
-      title: 'porsche 911 | porsche 911 gt3 | black wallpaper #porsche',
+      title: 'Porsche 911 GT3',
+      description: 'A sleek black Porsche 911 GT3 in a dark aesthetic.',
+      category: 'Cars',
       likes: 300,
       comments: 15,
     },
@@ -33,6 +40,8 @@ export const DataProvider = ({children}) => {
       image:
         'https://i.pinimg.com/564x/f6/53/b8/f653b826935c938025c07765bf168b0a.jpg',
       title: 'How to dress for your body type',
+      description: 'Fashion tips for dressing according to your body type.',
+      category: 'Fashion',
       likes: 120,
       comments: 8,
     },
@@ -40,7 +49,9 @@ export const DataProvider = ({children}) => {
       id: '4',
       image:
         'https://i.pinimg.com/564x/20/ef/b9/20efb9d05a9f41a6d06f5d600de1b9ed.jpg',
-      title: 'Gunmetal grey porsche',
+      title: 'Gunmetal Grey Porsche',
+      description: 'A stunning Porsche in a gunmetal grey finish.',
+      category: 'Cars',
       likes: 180,
       comments: 12,
     },
@@ -49,6 +60,8 @@ export const DataProvider = ({children}) => {
       image:
         'https://i.pinimg.com/564x/46/8b/a9/468ba9cd91ca558b34d97204fd83ed81.jpg',
       title: '',
+      description: 'An aesthetic shot of a cozy and minimal interior.',
+      category: 'Home Decor',
       likes: 50,
       comments: 3,
     },
@@ -56,7 +69,9 @@ export const DataProvider = ({children}) => {
       id: '6',
       image:
         'https://i.pinimg.com/474x/01/92/48/0192489f020c925d63d6bdc691830405.jpg',
-      title: 'The Vallarta House by Ezequiel Farca Architects: Large & Modern',
+      title: 'The Vallarta House',
+      description: 'A modern and luxurious house designed by Ezequiel Farca.',
+      category: 'Architecture',
       likes: 240,
       comments: 20,
     },
@@ -64,7 +79,9 @@ export const DataProvider = ({children}) => {
       id: '7',
       image:
         'https://i.pinimg.com/564x/39/ea/6e/39ea6ed3a4dd259bf95aa1e5f327c52e.jpg',
-      title: 'The Dodge challenger',
+      title: 'The Dodge Challenger',
+      description: 'An iconic muscle car with a bold design.',
+      category: 'Cars',
       likes: 90,
       comments: 5,
     },
@@ -72,7 +89,9 @@ export const DataProvider = ({children}) => {
       id: '8',
       image:
         'https://i.pinimg.com/474x/47/4a/14/474a142174525e10d749aacc24b53f99.jpg',
-      title: 'my Macbook Pro M1 setup',
+      title: 'MacBook Pro M1 Setup',
+      description: 'A minimal and productive workspace setup.',
+      category: 'Tech',
       likes: 130,
       comments: 7,
     },
@@ -80,7 +99,9 @@ export const DataProvider = ({children}) => {
       id: '9',
       image:
         'https://i.pinimg.com/474x/01/d7/6f/01d76f2237584909b4255e2de9025b26.jpg',
-      title: 'Night drives',
+      title: 'Night Drives',
+      description: 'A scenic view of the city lights during a night drive.',
+      category: 'Photography',
       likes: 170,
       comments: 6,
     },
@@ -88,7 +109,9 @@ export const DataProvider = ({children}) => {
       id: '10',
       image:
         'https://i.pinimg.com/736x/36/9b/a6/369ba66b5428585ad149614ed2bafe3d.jpg',
-      title: 'Signature decor',
+      title: 'Signature Decor',
+      description: 'Elegant and stylish home decor inspiration.',
+      category: 'Home Decor',
       likes: 110,
       comments: 4,
     },
@@ -96,10 +119,13 @@ export const DataProvider = ({children}) => {
       id: '11',
       image:
         'https://i.pinimg.com/564x/67/d1/3d/67d13d851bc27e4fbdb4d71a5e25998f.jpg',
-      title: 'randoms',
+      title: 'Randoms',
+      description: 'A collection of random but intriguing visuals.',
+      category: 'Miscellaneous',
       likes: 70,
       comments: 2,
     },
+
     {
       id: '12',
       image:

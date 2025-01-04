@@ -1,11 +1,17 @@
-import {StyleSheet, Image, FlatList, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Image,
+  FlatList,
+  TouchableOpacity,
+  StatusBar,
+} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {useContext} from 'react';
-import {DataContext} from '../context/Data'; // Context adını düzgün içe aktarıyoruz.
+import {DataContext} from '../context/Data';
 
 const Render = () => {
-  const {pinterestPosts} = useContext(DataContext); // Doğru context'e erişiyoruz.
+  const {pinterestPosts} = useContext(DataContext);
   const navigation = useNavigation();
 
   const renderItem = ({item}) => (
@@ -18,6 +24,7 @@ const Render = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar hidden={true} />
       <FlatList
         data={pinterestPosts}
         renderItem={renderItem}
@@ -25,6 +32,7 @@ const Render = () => {
         numColumns={2}
         columnWrapperStyle={styles.row}
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.listContent}
       />
     </SafeAreaView>
   );
@@ -35,7 +43,10 @@ export default Render;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 8,
+    backgroundColor: '#fff',
+  },
+  listContent: {
+    padding: 0,
   },
   row: {
     justifyContent: 'space-between',
